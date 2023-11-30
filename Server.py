@@ -1,4 +1,6 @@
 import socket 
+import subprocess
+import platform #Added for platform detection 
 
 def run_server():
     # create a socket object 
