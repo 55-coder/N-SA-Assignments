@@ -13,6 +13,22 @@ def run_server():
     server.bind((server_ip, port))
     print(f"[PROGRESS] Socket is binded to Ip address {server_ip} and to port {port}") 
 
+    #trace the route before listening for incoming connections
+    trace_command = ""
+    if platform.system() == "Linux":
+        trace_command = "traceroute"
+    elif platform.system() == "Windows":
+        trace_command = "tracecert"
+    else:
+        print("Platform not supported for tracing the route.")
+
+    if trace_command:
+        trace_route_command = f"{trace_command} {server_ip}"
+        print(f"[PROGRESS] Tracing route to {server_ip}...")
+        subprocess.run(trace_route_command. shell = True)
+    else:
+        print("Route tracing not supported on this platform")
+        
     # listen for incoming connections
     server.listen(0)
     print(f"Listening on {server_ip}:{port}")
